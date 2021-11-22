@@ -8,6 +8,7 @@ describe("Passenger class", () => {
         const seatNumber = "25B";
         const testPassenger = new Passenger(name, passportNumber, seatNumber);
         expect(testPassenger).toBeDefined();
+        expect(testPassenger instanceof Passenger).toBeTruthy();
     })
 
     test("passenger must have name", () => {
@@ -16,7 +17,7 @@ describe("Passenger class", () => {
         const passportNumber = "555555";
         const seatNumber = "25B";
         const testPassenger = new Passenger(name, passportNumber, seatNumber);
-        expect(testPassenger.name).toBe("John");
+        expect(testPassenger.name).toBe(name);
     })
 
     test("passenger must have a passportNumber", () => {
@@ -25,7 +26,7 @@ describe("Passenger class", () => {
         expect(() => new Passenger(name)).toThrowError("passenger must have a passport number");
         const passportNumber = "555555";
         const testPassenger = new Passenger(name, passportNumber, seatNumber);
-        expect(testPassenger.passportNumber).toBe("555555");
+        expect(testPassenger.passportNumber).toBe(passportNumber);
     })
 
     test("passenger must have a seatNumber", () => {
@@ -34,7 +35,7 @@ describe("Passenger class", () => {
         expect(() => new Passenger(name, passportNumber)).toThrowError("passenger must have a seat number");
         const seatNumber = "25B";
         const testPassenger = new Passenger(name, passportNumber, seatNumber);
-        expect(testPassenger.seatNumber).toBe("25B");
+        expect(testPassenger.seatNumber).toBe(seatNumber);
     })
 
     test("passenger must be able to add a bag", () => {
@@ -46,5 +47,13 @@ describe("Passenger class", () => {
         const testBagA = new Bag(9)
         testPassenger.addBag(testBagA);
         expect(testPassenger.bags).toStrictEqual([testBagA]);
+    })
+
+    test("passenger must be able to call attendant", () => {
+        const name = "John";
+        const passportNumber = "555555";
+        const seatNumber = "25B";
+        const testPassenger = new Passenger(name, passportNumber, seatNumber);
+        expect(testPassenger.callAttendant()).toBe("Hello, please assist me");
     })
 })
